@@ -11,3 +11,10 @@ def relu_derivative(x: np.ndarray) -> np.ndarray:
     return (x > 0).astype(float) # aqui é simples: se x é maior que 0, retorna true e o astype faz a função de transformar em 1 ou 0.
 
 # O desafio aqui, mesmo que o cáculo seja bem simples, foi pensar mesmo em como transformar isso em código.
+
+# Essa função faz a questão de probabilidade, então ela soma os valores de cada linha para dar a probabilidade
+def softmax(x: np.ndarray) -> np.ndarray:
+
+    exp_x = np.exp(x) # aplicamos a exponecial para cada elemento da matriz para transformar em probabilidade
+
+    return exp_x / np.sum(exp_x, axis=1, keepdims=True) # retorna a oorcentagem tirada da divisão entre a exponecial e a soma de todas as exponeciais, isso é a função softmax de fato.
