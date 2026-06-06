@@ -15,6 +15,11 @@ def relu_derivative(x: np.ndarray) -> np.ndarray:
 # Essa função faz a questão de probabilidade, então ela soma os valores de cada linha para dar a probabilidade
 def softmax(x: np.ndarray) -> np.ndarray:
 
-    exp_x = np.exp(x) # aplicamos a exponecial para cada elemento da matriz para transformar em probabilidade
+    shifted_x = x - np.max(x, axis=1, keepdims=True) # subtraí o maior value para não termos problemas na exponencial, isso é uma técnica comum para evitar overflow numérico.
+
+    exp_x = np.exp(shifted_x) # aplicamos a exponecial para cada elemento da matriz para transformar em probabilidade
 
     return exp_x / np.sum(exp_x, axis=1, keepdims=True) # retorna a oorcentagem tirada da divisão entre a exponecial e a soma de todas as exponeciais, isso é a função softmax de fato.
+
+# um problema que tive foi não ter tratado os valores mais altos, então quando eu vou carcular uma exponecial de um valor altissímo, o numpy só retorna "inf", assim um número infinito mais outro número infinito ele retorna nan
+#para resolver isso, eu subtraí o maior valor da matriz, assim a exponecial de um número grande se torna a exponecial de um número pequeno, evitando o problema do overflow numérico.
