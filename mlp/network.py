@@ -1,6 +1,6 @@
 import numpy as np
 
-from mlp.activations import relu, softmax # importando as funçõeszinhas de ativação que criamos
+from mlp.activations import relu, relu_derivative, softmax # importando as funçõeszinhas de ativação que criamos
 
 # fazendo a classe da rede neural, aqui é onde a mágica acontece, é onde a gente cria a estrutura da rede, os pesos, os bias e o forward pass
 class MLP:
@@ -64,3 +64,40 @@ class MLP:
         self.activations.append(probabilities)
 
         return probabilities
+
+    # Um desafio da parte de cima foi entender como a estruturação da rede e porque não começar com os pesos em 0. Aprendi depois que fui dar uma olhada do porque todos os pesos tavam iguais depois do forward pass e percebi que era porque os pesos estavam todos iguais, então a rede não tinha como aprender, porque a atualização dos pesos ia ser a mesma para todos os pesos, então a rede não ia conseguir diferenciar os neurônios e aprender coisas diferentes em cada um. Por isso é importante começar com pesos aleatórios, para que a rede possa aprender coisas diferentes em cada neurônio e evoluir de forma mais eficiente
+
+# Faz o backpropagation
+    def backward(self, y_true: np.ndarray) -> tuple[list, list]:
+ 
+        num_samples = y_true.shape[0] 
+
+        probabilities = self.activations[-1].copy() # pega as probabilidades da última camada, que é a saída da rede
+
+        one_hot_targets = np.zeros_like(probabilities)
+        one_hot_targets[np.arange(num_samples), y_true] = 1
+
+        delta = (probabilities - one_hot_targets) / num_samples # compara o que a rede previu menos o que deveria ter previsto
+
+        grad_weights = [None] * self.num_layers # gradientes das matrizes de pesos
+        grad_biases = [None] * self.num_layers # gradientes dos vetores de b
+
+        for layer_index in reversed(range(self.num_layers)): # esse loop vai calcular os gradientes para cada camada, começando da última camada e indo para a primeira
+            previous_activation = self.activations[layer_index]
+
+            grad_weights[layer_index] = previous_activation.T @ delta # multiplicação de matrizes para calcular o gradiente dos pesos
+
+            grad_biases[layer_index] = np.sum( # soma os deltas para calcular o gradiente dos b
+                delta,
+                axis=0,
+                keepdims=True
+            )
+
+            if layer_index > 0: # se não for a primeira camada, calcula o delta para a próxima camada
+                delta = (
+                    delta @ self.weights[layer_index].T
+                ) * relu_derivative(
+                    self.pre_activations[layer_index - 1]
+                )
+
+        return grad_weights, grad_biases

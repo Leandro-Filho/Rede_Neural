@@ -7,11 +7,7 @@ def cross_entropy_loss(probabilities: np.ndarray, y_true: np.ndarray) -> float:
     num_samples = probabilities.shape[0]
 
     # essa parte é bem interessante: para não ter valores igual a zerp dentro do log, colocamos que o valor mínimo é 1e-12, isso ainda possibilita a gente fazer as contas 
-    clipped_probabilities = np.clip(
-        probabilities,
-        1e-12,
-        1.0
-    )
+    clipped_probabilities = np.clip(probabilities, 1e-12, 1.0)
 
     correct_class_probabilities = clipped_probabilities[
         np.arange(num_samples),
