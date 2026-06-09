@@ -74,11 +74,14 @@ class MLP:
 
         probabilities = self.activations[-1].copy() # pega as probabilidades da última camada, que é a saída da rede
 
+    # transformamos as respostas corretas em uma matriz.
         one_hot_targets = np.zeros_like(probabilities)
         one_hot_targets[np.arange(num_samples), y_true] = 1
 
         delta = (probabilities - one_hot_targets) / num_samples # compara o que a rede previu menos o que deveria ter previsto
 
+
+    #listas vazias para armazenar os gradientes.
         grad_weights = [None] * self.num_layers # gradientes das matrizes de pesos
         grad_biases = [None] * self.num_layers # gradientes dos vetores de b
 
@@ -101,3 +104,5 @@ class MLP:
                 )
 
         return grad_weights, grad_biases
+
+    # Aqui o desafio foi entender o cálculo do gradiente, entendi que é calculado a diferença entre o que a rede previu e o que deveria ter previsto, e depois multiplicado pela ativação da camada anterior para calcular o gradiente dos pesos, e somado os deltas para calcular o gradiente dos b. 
