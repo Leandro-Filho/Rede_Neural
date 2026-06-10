@@ -132,10 +132,9 @@ x_train, y_train, x_test, y_test = (
 model = MLP(
     layer_sizes=[
         784,
-        512,
-        256,
-        128,
-        64,
+        768,
+        384,
+        192,
         10
     ],
     seed=42
