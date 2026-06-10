@@ -32,7 +32,7 @@ def train(
     x_test: np.ndarray,
     y_test: np.ndarray,
     epochs: int = 20,
-    batch_size: int = 16,
+    batch_size: int = 32,
     seed: int = 42
 ) -> None:
     """
@@ -132,15 +132,15 @@ x_train, y_train, x_test, y_test = (
 model = MLP(
     layer_sizes=[
         784,
+        256,
         128,
-        64,
         10
     ],
     seed=42
 )
 
 optimizer = SGD(
-    learning_rate=0.15
+    learning_rate=0.11
 )
 
 train(
@@ -151,5 +151,5 @@ train(
     x_test=x_test,
     y_test=y_test,
     epochs=20,
-    batch_size=16
+    batch_size=32
 )
