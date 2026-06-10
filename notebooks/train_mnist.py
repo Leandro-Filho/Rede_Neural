@@ -31,7 +31,7 @@ def train(
     y_train: np.ndarray,
     x_test: np.ndarray,
     y_test: np.ndarray,
-    epochs: int = 10,
+    epochs: int = 30,
     batch_size: int = 64,
     seed: int = 42
 ) -> None:
@@ -140,7 +140,7 @@ model = MLP(
 )
 
 optimizer = SGD(
-    learning_rate=0.1
+    learning_rate=0.07
 )
 
 train(
@@ -150,6 +150,6 @@ train(
     y_train=y_train,
     x_test=x_test,
     y_test=y_test,
-    epochs=10,
+    epochs=30,
     batch_size=64
 )
