@@ -132,16 +132,16 @@ x_train, y_train, x_test, y_test = (
 model = MLP(
     layer_sizes=[
         784,
-        768,
-        384,
-        192,
+        512,
+        256,
+        128,
         10
     ],
     seed=42
 )
 
 optimizer = SGD(
-    learning_rate=0.11
+    learning_rate=0.12
 )
 
 train(
