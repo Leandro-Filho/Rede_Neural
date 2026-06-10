@@ -31,7 +31,7 @@ def train(
     y_train: np.ndarray,
     x_test: np.ndarray,
     y_test: np.ndarray,
-    epochs: int = 20,
+    epochs: int = 17,
     batch_size: int = 32,
     seed: int = 42
 ) -> None:
@@ -135,6 +135,7 @@ model = MLP(
         512,
         256,
         128,
+        64,
         10
     ],
     seed=42
@@ -151,6 +152,6 @@ train(
     y_train=y_train,
     x_test=x_test,
     y_test=y_test,
-    epochs=13,
+    epochs=17,
     batch_size=32
 )
