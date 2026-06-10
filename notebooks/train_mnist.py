@@ -132,8 +132,8 @@ x_train, y_train, x_test, y_test = (
 model = MLP(
     layer_sizes=[
         784,
+        512,
         256,
-        128,
         10
     ],
     seed=42
@@ -150,6 +150,6 @@ train(
     y_train=y_train,
     x_test=x_test,
     y_test=y_test,
-    epochs=20,
+    epochs=13,
     batch_size=32
 )
