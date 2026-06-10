@@ -152,5 +152,5 @@ train(
     x_test=x_test,
     y_test=y_test,
     epochs=17,
-    batch_size=24
+    batch_size=32
 )
