@@ -141,7 +141,7 @@ model = MLP(
 )
 
 optimizer = SGD(
-    learning_rate=0.13
+    learning_rate=0.12
 )
 
 train(
@@ -152,5 +152,5 @@ train(
     x_test=x_test,
     y_test=y_test,
     epochs=17,
-    batch_size=32
+    batch_size=24
 )
