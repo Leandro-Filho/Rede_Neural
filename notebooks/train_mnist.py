@@ -32,7 +32,7 @@ def train(
     x_test: np.ndarray,
     y_test: np.ndarray,
     epochs: int = 30,
-    batch_size: int = 64,
+    batch_size: int = 32,
     seed: int = 42
 ) -> None:
     """
@@ -151,5 +151,5 @@ train(
     x_test=x_test,
     y_test=y_test,
     epochs=30,
-    batch_size=64
+    batch_size=32
 )
