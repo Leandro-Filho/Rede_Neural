@@ -141,7 +141,7 @@ model = MLP(
 )
 
 optimizer = SGD(
-    learning_rate=0.12
+    learning_rate=0.13
 )
 
 train(
